@@ -6,8 +6,8 @@ This program is a pair trading model based on z-score. The specific idea is to f
 This model is based on the following basic assumptions:
 1.	There are no transaction fees.
 2.	There is no interest rate on short selling.
-3.	The maximum amount of securities is 1 million.
-4.	Buy up to $1 million.
+3.	The maximum amount of short selling is 1 million.
+4.	Long selling is up to $1 million.
 5.	There is no delisting risk.
 6.	There is no dividends.
 
@@ -38,3 +38,21 @@ Next step:
 2.	Increase the automation performance of the program, in the training window to train the transaction threshold instead of the using artificial transaction threshold.
 3.	Increase transaction frequency and reduce opportunity cost.
 
+# version 2
+update：
+
+Add two pictures on the end:
+1.pictures of returens for each transaction cycle
+2.pictures of accumulative returns from the first transaction cycle to the last
+
+# version 3
+update：
+
+new assumption:
+In version3, the principal is still one million, but in order to control the risk, the sum of the amount of short selling and the amount of long selling is one million. Margin for short selling is the amount of short selling, and when loss reaches the margin, position is forced to close out.
+
+New transaction logic：
+In version3, new transaction logic was adopted to increase transaction frequency. In version2, the training window and test window are fixed values determined by parameters. In the test set, when the number of transactions reaches the preset upper limit, the model adopts the strategy of waiting for the next window. In the new model, when the trading limit is reached in the test set, the next test set is immediately entered and the new training set is retraced forward. The new transaction logic effectively reduces opportunity cost.
+At the same time, the method of finding cointegration pair is changed. Due to the adoption of the new transaction logic, cointegration pairs cannot be found in some training windows (p-value of all the underlying pairs is greater than 0.05). In order to find the new cointegration pair, the following adjustments are made in version3: when no cointegration pair appears, the training set is delayed one day and matched again until the new cointegration pair is found.
+
+Although the benefits of version3 are lower than that of version2, version3 effectively reduces the system risk, makes full use of the time, avoids system hang-up, and effectively reduces the opportunity cost. Therefore, version3 can be considered as an improved version of version2.
