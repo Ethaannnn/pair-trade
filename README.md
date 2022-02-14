@@ -42,6 +42,7 @@ Next step:
 update：
 
 Add two pictures on the end:
+
 1.pictures of returens for each transaction cycle
 2.pictures of accumulative returns from the first transaction cycle to the last
 
@@ -49,9 +50,11 @@ Add two pictures on the end:
 update：
 
 new assumption:
+
 In version3, the principal is still one million, but in order to control the risk, the sum of the amount of short selling and the amount of long selling is one million. Margin for short selling is the amount of short selling, and when loss reaches the margin, position is forced to close out.
 
 New transaction logic：
+
 In version3, new transaction logic was adopted to increase transaction frequency. In version2, the training window and test window are fixed values determined by parameters. In the test set, when the number of transactions reaches the preset upper limit, the model adopts the strategy of waiting for the next window. In the new model, when the trading limit is reached in the test set, the next test set is immediately entered and the new training set is retraced forward. The new transaction logic effectively reduces opportunity cost.
 At the same time, the method of finding cointegration pair is changed. Due to the adoption of the new transaction logic, cointegration pairs cannot be found in some training windows (p-value of all the underlying pairs is greater than 0.05). In order to find the new cointegration pair, the following adjustments are made in version3: when no cointegration pair appears, the training set is delayed one day and matched again until the new cointegration pair is found.
 
