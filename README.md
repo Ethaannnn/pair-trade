@@ -44,6 +44,7 @@ update：
 Add two pictures on the end:
 
 1.pictures of returens for each transaction cycle
+
 2.pictures of accumulative returns from the first transaction cycle to the last
 
 # version 3
